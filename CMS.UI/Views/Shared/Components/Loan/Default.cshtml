@@ -1,0 +1,21 @@
+﻿<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customerLoanQueries"
+   aria-expanded="true" aria-controls="collapsePages">
+	<i class="fas fa-fw fa-folder"></i>
+	<span>Customer Loan Queries</span>
+</a>
+<div id="customerLoanQueries" class="collapse" aria-labelledby="headingPages">
+	<div class="bg-white py-2 collapse-inner rounded">
+		<ul class="navbar-nav flex-grow-1">
+
+			@foreach (var item in Model)
+			{
+				<li class="nav-item">
+					<h4 class="red mt-2">@item.Title</h4>
+					<p>@item.Status</p>
+					<a class="nav-link text-dark" asp-area="Admin" asp-controller="Loans" asp-action="Assess" asp-route-loanId="@item.Id">Assess</a>
+				</li>
+			}
+		</ul>
+
+	</div>
+</div>

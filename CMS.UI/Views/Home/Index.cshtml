@@ -1,0 +1,72 @@
+﻿@model HomeVM
+<link rel="stylesheet" href="~/css/slider.css"/>
+<div class="slide-part">
+	<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;" class="swiper mySwiper2">
+		<div class="swiper-wrapper">
+			@foreach (var item in Model.Sliders)
+			{
+				<div class="swiper-slide">
+					<img src="@Url.Content($"~/SliderImages/{item.ImageUrl}")" alt="Alternate Text" />
+				</div>
+			}
+		</div>
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+	</div>
+	<div thumbsSlider="" class="swiper mySwiper">
+		<div class="swiper-wrapper">
+			@foreach (var item in Model.Sliders)
+			{
+				<div class="swiper-slide">
+					<img src="@Url.Content($"~/SliderImages/{item.ImageUrl}")" alt="Alternate Text" />
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+<div class="d-flex justify-content-centerp pt-5">
+    @foreach (var item in Model.Merchants)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                <a asp-controller="Branchs" asp-action="Index" asp-route-merchantId="@item.Id" class="card-link">Products</a>
+            </div>
+        </div>
+    }
+</div>
+@section scripts {
+
+
+    <script src="~/LogInTemplate/js/jquery-3.3.1.min.js"></script>
+    <script src="~/LogInTemplate/js/popper.min.js"></script>
+    <script src="~/LogInTemplate/js/bootstrap.min.js"></script>
+    <script src="~/LogInTemplate/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            loop: true,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            thumbs: {
+                swiper: swiper,
+            },
+        });
+
+    </script>
+}

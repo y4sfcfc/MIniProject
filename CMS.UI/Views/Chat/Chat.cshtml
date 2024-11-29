@@ -1,0 +1,185 @@
+﻿@model List<UserVM>
+@{
+	Layout = null;
+	int i = 1;
+}
+<link rel="stylesheet" href="~/css/signalr.css"/>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+<link rel="icon" type="image/x-icon" href="~/Images/chatIcon.png">
+<title>Ministore ChatBox</title>
+
+<div class="container">
+	<!-- Content wrapper start -->
+	<div class="content-wrapper" style="height: 100vh;">
+
+		<!-- Row start -->
+		<div class="row gutters">
+
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+				<div class="card m-0">
+
+					<!-- Row start -->
+					<div class="row no-gutters" style="height: 100vh;">
+						<div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+							<div class="users-container">
+								<div class="chat-search-box">
+									<div class="input-group">
+										<input class="form-control" placeholder="Search">
+										<div class="input-group-append">
+											<button type="button" class="btn btn-warning">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+								<ul class="users">
+									@foreach (var admin in Model)
+									{
+										<li class="person" data-chat="person1">
+											<div class="user">
+												<img src="https://www.bootdey.com/img/Content/avatar/avatar1.png"
+													 alt="Retail Admin">
+												@if (!string.IsNullOrEmpty(admin.ConnectionId))
+												{
+													<span id="@admin.Id" class="status online"></span>
+												}
+												else
+												{
+													<span id="@admin.Id" class="status offline"></span>
+												}
+											</div>
+											<p class="name-time">
+												<span class="name">@admin.UserName</span>
+											</p>
+										</li>
+									}
+								</ul>
+							</div>
+						</div>
+						@foreach (var admin in Model)
+						{
+							<div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9 @(i == 1 ? "chat-active" : "d-none")"
+								 id="chat@(admin.Id)">
+								<div class="selected-user" style="position: relative">
+									<span>To: <span class="name">@admin.UserName</span></span>
+									<a class="btn btn-outline-danger closeBtn" asp-action="index" asp-controller="merchants">Exit</a>
+								</div>
+								<div class="chat-container">
+									<ul class="chat-box chatContainerScroll" style="overflow: scroll">
+									</ul>
+									<div class="input-group mt-3 mb-0">
+										<input type="text" class="form-control messageInput"
+											   placeholder="Type your message here..." />
+										<input class="userInput" value="@admin.Id" hidden />
+										<div class="input-group-append">
+											<button class="btn btn-outline-warning sendButton" type="button">Send</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							{
+								i++;
+							}
+						}
+					</div>
+					<!-- Row end -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Content wrapper end -->
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+<script>
+	var connection = new signalR.HubConnectionBuilder().withUrl('/chatHub').build();
+	connection.start().then(() => {
+		connection.on("Login", function (userId) {
+			let user = document.getElementById(userId)
+			user.style.background = "green";
+		})
+		connection.on("Logout", function (userId) {
+			let user = document.getElementById(userId);
+			user.style.background = "red";
+		})
+		connection.on("ReceiveMessage", function (userId, message) {
+
+			var chat = document.querySelector(`#chat${userId} .chat-box`);
+
+			let currentDate = new Date();
+
+			let hours = String(currentDate.getHours()).padStart(2, '0');
+			let minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+			let formattedTime = `${hours}:${minutes}`;
+
+			chat.innerHTML += `<li class="chat-left">
+					<div class="chat-avatar">
+						<img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Retail Admin">
+						<div class="chat-name">Receiver</div>
+					</div>
+					<div class="chat-text">${message}</div>
+					<div class="chat-hour">${formattedTime}</div>
+				</li>`
+
+			chat.scrollTop = chat.scrollHeight;
+
+		})
+	}
+	)
+	var persons = document.querySelectorAll(".person");
+
+	persons.forEach(person => {
+		person.addEventListener("click", () => {
+			var id = person.querySelector("span").id;
+			var chat = document.querySelector(`#chat${id}`)
+			document.querySelectorAll(".chat-active").forEach(x => x.classList.add("d-none"));
+
+			chat.classList.remove("d-none");
+			chat.classList.add("chat-active")
+		})
+	})
+
+	document.querySelectorAll(".sendButton").forEach(btn => {
+		btn.addEventListener("click", () => {
+			var userId = btn.parentElement.parentElement.querySelector(".userInput").value;
+			var message = btn.parentElement.parentElement.querySelector(".messageInput").value;
+		
+
+			connection.invoke("SendMessage", userId, message).then(() => {
+				btn.parentElement.parentElement.querySelector(".messageInput").value = "";
+
+				let currentDate = new Date();
+
+				let hours = String(currentDate.getHours()).padStart(2, '0');
+				let minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+				let formattedTime = `${hours}:${minutes}`;
+
+				var chat = document.querySelector(`#chat${userId} .chat-box`);
+
+				chat.innerHTML += `
+
+				<li class="chat-right">
+					<div class="chat-text">${message}</div>
+				 <div class="chat-hour">${formattedTime}</div>
+					<div class="chat-avatar">
+						<img src="https://www.bootdey.com/img/Content/avatar/avatar1.png" alt="Retail Admin">
+						<div class="chat-name">You</div>
+					</div>
+				</li>
+									  `
+				chat.scrollTop = chat.scrollHeight;
+			}).catch(function (err) {
+				return console.error(err.toString())
+			})
+
+		})
+	})
+</script>

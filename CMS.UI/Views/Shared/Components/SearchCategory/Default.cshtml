@@ -1,0 +1,11 @@
+﻿@model List<CategoryVM>
+<ul class="cat-list">
+	@foreach (var category in Model.Where(x => x.ParentId == 0).ToList())
+	{
+		<li class="cat-list-item">
+			<a href="@Url.Action("Index", "Categories", new { parentId = category.Id })">
+				@category.Name
+			</a>
+		</li>
+	}
+</ul>

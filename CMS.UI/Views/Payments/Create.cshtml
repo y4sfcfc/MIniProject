@@ -1,0 +1,33 @@
+﻿@model PaymentVM
+@{
+	Layout = null;
+}
+<head>
+	<link rel="stylesheet" href="~/css/merchant.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<div class="formbold-main-wrapper">
+	<div class="formbold-form-wrapper">
+		<form asp-action="Create" asp-route-userId="@Context.Request.Query["userId"]" asp-route-loanId="@Context.Request.Query["loanId"]">
+			<div class="formbold-input-group">
+				@Html.HiddenFor(p=>p.LoanId)
+				@Html.HiddenFor(p=>p.Amount)
+				@Html.HiddenFor(p=>p.CustomerId)
+			<h4>Loan Title: @Model.Loan.Title</h4>
+				<h4>Current Amount: @Model.CurrentAmount <i class="fa-solid fa-dollar-sign"></i></h4>
+				<label asp-for="Amount" class="formbold-form-label"> Amount  </label>
+				<input readonly asp-for="Amount"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Amount" class="text-danger"></span>
+			</div>
+			<div class="formbold-input-group">
+				<label asp-for="PaymentType" class="formbold-form-label"> Payment Type </label>
+				<select required asp-for="PaymentType" class="formbold-form-input form-control" asp-items="@(new SelectList(Model.PaymentTypes))">
+					<option>Please select one </option>
+				</select>
+				<span asp-validation-for="PaymentType" class="text-danger"></span>
+			</div>
+			<button class="formbold-btn">Pay</button>
+		</form>
+	</div>
+</div>

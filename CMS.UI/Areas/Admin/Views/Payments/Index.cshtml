@@ -1,0 +1,43 @@
+﻿@model List<PaymentVM>
+
+﻿﻿﻿@{
+	ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+	<div class="container">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Title</th>
+					<th scope="col">Date</th>
+					<th scope="col">Payment Type</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Current Amount</th>
+					<th scope="col">Terms</th>
+					<th scope="col">Address</th>
+					<th scope="col">Customer</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<th scope="row">@item.Id</th>
+						<td>@item.Loan.Title</td>
+						<td>@item.Date</td>
+						<td>@item.PaymentType</td>
+						<td>@item.Amount  <i class="fa-solid fa-dollar-sign"></i></td>
+						<th scope="row">@item.LoanDetail.CurrentAmount <i class="fa-solid fa-dollar-sign"></i></th>
+						<th scope="row">@item.Loan.Terms</th>
+						<td>@item.Customer.Address</td> 
+						<th scope="row">@item.Customer.Name @item.Customer.Surname</th>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+	</div>
+</div>

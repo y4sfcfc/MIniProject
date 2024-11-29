@@ -1,0 +1,50 @@
+﻿@model List<CategoryVM>
+
+﻿﻿﻿@{
+	ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+	<div class="container">
+		<div class="d-flex justify-content-end mb-3">  @Html.ActionLink("Add", "Create", "Categories", null, new { @class = "btn btn-primary" })</div>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Name</th>
+					<th scope="col">Level</th>
+					<th scope="col">Parent Category</th>
+					<th scope="col">Branch</th>
+					<th scope="col">Employee</th>
+					<th scope="col">Operation</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<th scope="row">@item.Id</th>
+						<td>@item.Name</td>
+						<td>@item.Level</td>
+						<td>@item.ParentCategory</td>
+						<th scope="row">@item.BranchName</th>
+						<th scope="row">@item.EmployeeName</th>
+						<td>
+							<a class="btn btn-warning" asp-area="admin" asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id">
+								<i class="far fa-pen-to-square"></i>
+
+							</a>
+							<a class="btn btn-danger" asp-area="admin" asp-controller="Categoies" asp-action="Delete" asp-route-id="@item.Id">
+								<i class="fas fa-trash-can"></i>
+							</a>
+						</td>
+					</tr>
+				}
+
+
+			</tbody>
+		</table>
+
+	</div>
+</div>

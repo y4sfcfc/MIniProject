@@ -1,0 +1,15 @@
+﻿<div class="search-popup">
+    <div class="search-popup-container">
+
+        <form role="search"  class="search-form" asp-controller="Categories" asp-action="Index">
+            <input  type="search" id="search-form" class="search-field" placeholder="Type and press enter" name="searchcategory"  />
+            <span class="text-danger"></span>
+            <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
+        </form>
+
+        <h5 class="cat-list-title">Browse Categories</h5>
+
+        @await Component.InvokeAsync("SearchCategory")
+
+    </div>
+</div>

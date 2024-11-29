@@ -1,0 +1,48 @@
+﻿@model List<UserVM>
+
+﻿﻿﻿@{
+	ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+	<div class="container">
+		<div class="d-flex justify-content-end mb-3">  @Html.ActionLink("Add", "Create", "Users", null, new { @class = "btn btn-primary" })</div>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Roles</th>
+					<th scope="col">Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<th scope="row">@item.Id</th>
+						<td>@item.UserName</td>
+						<td>@item.Email</td>
+						<td>@string.Join(",", item.Roles)</td>
+						<td>
+							<a class="btn btn-warning" asp-area="admin" asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">
+								<i class="far fa-pen-to-square"></i>
+
+							</a>
+							<a class="btn btn-danger" asp-area="admin" asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">
+								<i class="fas fa-trash-can"></i>
+							</a>
+							<a class="btn btn-secondary" asp-area="admin" asp-controller="Users" asp-action="AssignRole" asp-route-userId="@item.Id">
+								<i class="fas fa-braille"></i>
+							</a>
+						</td>
+					</tr>
+				}
+
+
+			</tbody>
+		</table>
+
+	</div>
+</div>

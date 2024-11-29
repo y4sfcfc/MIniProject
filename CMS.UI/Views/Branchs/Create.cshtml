@@ -1,0 +1,47 @@
+﻿@model BranchVM
+<head>
+	<link rel="stylesheet" href="~/css/merchant.css">
+</head>
+<div class="formbold-main-wrapper">
+	<div class="formbold-form-wrapper">
+		
+		<form asp-action="Create">
+			<div class="formbold-input-group">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				@Html.HiddenFor(m => m.AppUserId)
+				<label asp-for="Name" class="formbold-form-label"> Branch Name </label>
+				<input asp-for="Name"
+					   placeholder="Enter name"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+
+			<div class="formbold-input-group">
+				<label asp-for="Description" class="formbold-form-label"> Description </label>
+				<input asp-for="Description"
+					   placeholder="Enter your Description"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+
+			<div class="formbold-input-group">
+				<label asp-for="Address" class="formbold-form-label"></label>
+				<input asp-for="Address" placeholder="Enter Address"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Address" class="text-danger"></span>
+
+			</div>
+			<div class="formbold-input-group">
+				<label asp-for="MerchantId" class="formbold-form-label">
+					Merchant
+				</label>
+				<select asp-for="MerchantId" class="formbold-form-select form-control" asp-items="@(new SelectList(Model.Merchants,nameof(Model.Id),nameof(Model.Name)))">
+					<option>Please select one</option>
+				</select>
+				<span asp-validation-for="MerchantId" class="text-danger"></span>
+			</div>
+
+			<button class="formbold-btn">Create</button>
+		</form>
+	</div>
+</div>

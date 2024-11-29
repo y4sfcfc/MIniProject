@@ -1,0 +1,30 @@
+﻿<link rel="stylesheet"
+	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+@model List<LoanVM>
+<div class="d-flex justify-content-center p-3">
+	@foreach (var loan in Model)
+	{
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h4 class="red mt-2">@loan.Title</h4>
+				@if (loan.Status == Status.Pending)
+				{
+					<p>Count:@loan.Count </p>
+
+					<p>Status: @loan.Status</p>
+					<p>Total : @loan.Price <i class="fa-solid fa-dollar-sign"></i></p>
+				}
+				@if (loan.Status == Status.Accept)
+				{
+					<p>Total : @loan.TotalPrice <i class="fa-solid fa-dollar-sign"></i></p>
+					<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#@loan.LoanDetail.Id">
+						Details
+					</button>
+					@await Html.PartialAsync("_Modal", loan)
+
+				}
+			</div>
+		</div>
+	}
+
+</div>

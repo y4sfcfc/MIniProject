@@ -1,0 +1,44 @@
+﻿@model List<MerchantVM>
+@{
+	ViewData["Title"] = "Home Page";
+}
+@if (User.IsInRole("Employee"))
+{
+	@await Component.InvokeAsync("Loan")
+}
+
+<div class="d-flex justify-content-centerp pt-5">
+	@foreach (var item in Model)
+	{
+		<div class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">@item.Name</h5>
+				<p class="card-text">@item.Description</p>
+				<p class="card-text">@item.TerminalNo</p>
+			</div>
+		</div>
+	}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+<script>
+	var connection = new signalR.HubConnectionBuilder().withUrl('/productHub').build();
+	connection.start().then(() => {
+
+		connection.on("ReceiveMessage", function (message) {
+
+
+
+			let currentDate = new Date();
+
+			let hours = String(currentDate.getHours()).padStart(2, '0');
+			let minutes = String(currentDate.getMinutes()).padStart(2, '0');
+
+			let formattedTime = `${hours}:${minutes}`;
+			toastr.success(`${message} at ${formattedTime}`);
+
+		})
+	}
+	)
+
+
+</script>

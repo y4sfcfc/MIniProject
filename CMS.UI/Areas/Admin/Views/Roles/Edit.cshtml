@@ -1,0 +1,35 @@
+﻿﻿﻿
+@model RoleVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Edit</h1>
+<hr>
+
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-3 ">
+        <div class="col-md-3">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+            <div class="form-group">
+
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,99 @@
+﻿﻿﻿
+@model ProductVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Create</h1>
+<hr>
+
+
+<form asp-action="Edit" enctype="multipart/form-data">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Categories</label>
+                <select asp-for="CategoryId"
+                        class="form-control"
+                        asp-items="@(new SelectList(Model.Categories, nameof(Model.Id), nameof(Model.Name)))">
+                    <option>Please select one</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="BranchId" class="control-label">Categories</label>
+                <select asp-for="BranchId"
+                        class="form-control"
+                        asp-items="@(new SelectList(Model.Branchs, nameof(Model.Id), nameof(Model.Name)))">
+                    <option>Please select one</option>
+                </select>
+                <span asp-validation-for="BranchId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Count" class="control-label"></label>
+                <input asp-for="Count" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ImageFiles" class="control-label"></label>
+                <input asp-for="ImageFiles" type="file" multiple class="form-control" />
+                <span asp-validation-for="ImageFiles" class="text-danger"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-3 ">
+        <div class="col-md-3">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
+        <div class="col-md-3 d-flex justify-content-end">
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+</form>

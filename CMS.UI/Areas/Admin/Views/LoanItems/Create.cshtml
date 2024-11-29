@@ -1,0 +1,51 @@
+﻿@model LoanItemVM
+﻿﻿
+
+
+<h1>Create</h1>
+<hr>
+
+
+<form asp-action="Create">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<div class="row">
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<label asp-for="LoanId" class="control-label">Loan</label>
+				<select required asp-for="LoanId" class="formbold-form-select form-control"  asp-items="@(new SelectList(Model.Loans,nameof(Model.Id),"Title"))">
+					<option>Please select one </option>
+				</select>
+				<span asp-validation-for="LoanId" class="text-danger"></span>
+			</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label asp-for="ProductId" class="control-label">Product</label>
+				<select required asp-for="ProductId" class="formbold-form-select form-control" asp-items="@(new SelectList(Model.Products,nameof(Model.Id),"Name"))">
+						<option>Please select one </option>
+					</select>
+					<span asp-validation-for="ProductId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label asp-for="Count" class="control-label"></label>
+					<input asp-for="Count" class="form-control" />
+					<span asp-validation-for="Count" class="text-danger"></span>
+				</div>
+			</div>
+
+		</div>
+		<div class="row mt-3 ">
+			<div class="col-md-3">
+				<a class="btn btn-primary" asp-action="Index">Back to List</a>
+			</div>
+			<div class="col-md-3 d-flex justify-content-end">
+				<div class="form-group">
+					<input type="submit" value="Create" class="btn btn-primary" />
+				</div>
+			</div>
+		</div>
+
+</form>

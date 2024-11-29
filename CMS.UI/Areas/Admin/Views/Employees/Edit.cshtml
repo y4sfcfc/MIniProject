@@ -1,0 +1,54 @@
+﻿@model EmployeeVM
+<head>
+	<link rel="stylesheet" href="~/css/merchant.css">
+</head>
+<div class="formbold-main-wrapper">
+	<div class="formbold-form-wrapper">
+		
+		<form asp-action="Edit">
+			<div class="formbold-input-group">
+				<label asp-for="Name" class="formbold-form-label"> Employee Name </label>
+				<input asp-for="Name"
+					   placeholder="Enter name"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+
+			<div class="formbold-input-group">
+				<label asp-for="Surname" class="formbold-form-label"> Surname </label>
+				<input asp-for="Surname"
+					   placeholder="Enter your Surname"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Surname" class="text-danger"></span>
+			</div>
+
+			<div class="formbold-input-group">
+				<label asp-for="Position" class="formbold-form-label"></label>
+				<input asp-for="Position" placeholder="Enter Terminal No"
+					   class="formbold-form-input form-control" />
+				<span asp-validation-for="Position" class="text-danger"></span>
+
+			</div>
+			<div class="formbold-input-group">
+				<label asp-for="BranchId" class="formbold-form-label">
+					Branch
+				</label>
+				<select asp-for="BranchId" class="formbold-form-select form-control" asp-items="@(new SelectList(Model.Branchs,nameof(Model.Id),nameof(Model.Name)))">
+					<option>Please select one</option>
+				</select>
+				<span asp-validation-for="BranchId" class="text-danger"></span>
+			</div>
+			<div class="formbold-input-group">
+				<label asp-for="AppUserId" class="formbold-form-label">
+					User
+				</label>
+				<select asp-for="AppUserId" class="formbold-form-select form-control" asp-items="@(new SelectList(Model.Users,nameof(Model.Id),"UserName"))">
+					<option>Please select one</option>
+				</select>
+				<span asp-validation-for="AppUserId" class="text-danger"></span>
+			</div>
+
+			<button class="formbold-btn">Create</button>
+		</form>
+	</div>
+</div>

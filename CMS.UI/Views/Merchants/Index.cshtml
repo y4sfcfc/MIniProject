@@ -1,0 +1,23 @@
+﻿@model List<MerchantVM>
+
+<div class="d-flex justify-content-centerp pt-5">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                <a asp-controller="Branchs" asp-action="Index" asp-route-merchantId="@item.Id" class="card-link">Products</a>
+            </div>
+        </div>
+    }
+</div>
+@section scripts {
+
+
+    <script src="~/LogInTemplate/js/jquery-3.3.1.min.js"></script>
+    <script src="~/LogInTemplate/js/popper.min.js"></script>
+    <script src="~/LogInTemplate/js/bootstrap.min.js"></script>
+    <script src="~/LogInTemplate/js/main.js"></script>
+
+}

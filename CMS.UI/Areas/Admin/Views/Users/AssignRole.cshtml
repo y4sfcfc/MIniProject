@@ -1,0 +1,47 @@
+﻿
+@model UserRoleVM
+<h1>Assign Role</h1>
+<hr>
+
+
+<form asp-action="AssignRole" >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input readonly asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="RoleId" class="control-label"></label>
+                <select asp-for="RoleId"
+                        class="form-control"
+                        asp-items="@(new SelectList(Model.Roles, nameof(RoleVM.Id), nameof(RoleVM.Name)))">
+                    <option>Please select one</option>
+                </select>
+                <span asp-validation-for="RoleId" class="text-danger"></span>
+            </div>
+        </div>
+
+        @Html.HiddenFor(p => p.UserId)
+    </div>
+    <div class="row mt-3 justify-content-between">
+        <div class="col-md-6">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <div class="form-group">
+
+                <input type="submit" value="Assign" class="btn btn-primary" />
+            </div>
+        </div>
+
+
+    </div>
+
+</form>

@@ -1,0 +1,44 @@
+﻿@model List<SliderVM>
+﻿﻿﻿@{
+	ViewData["Title"] = "Index";
+}
+<div class="container-fluid">
+	<div class="container">
+		<div class="d-flex justify-content-end mb-3">  @Html.ActionLink("Add", "Create", "Sliders", null, new { @class = "btn btn-primary" })</div>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Image</th>
+					<th scope="col">Title</th>
+					<th scope="col">Description</th>
+					<th scope="col">Active</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<th scope="row">@item.Id</th>
+						<th scope="row"><img src="@Url.Content($"~/SliderImages/{item.ImageUrl}")" /></th>
+						<td>@item.Title</td>
+						<td>@item.Description</td>
+						<th scope="row">@item.IsActive</th>
+						<td>
+							<a class="btn btn-warning" asp-area="admin" asp-controller="Sliders" asp-action="Edit" asp-route-id="@item.Id">
+								<i class="far fa-pen-to-square"></i>
+
+							</a>
+							<a class="btn btn-danger" asp-area="admin" asp-controller="Sliders" asp-action="Delete" asp-route-id="@item.Id">
+								<i class="fas fa-trash-can"></i>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+
+	</div>
+</div>

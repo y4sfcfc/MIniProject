@@ -1,0 +1,14 @@
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\bin\Debug\net8.0\CMS.DAL.deps.json
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\bin\Debug\net8.0\CMS.DAL.runtimeconfig.json
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\bin\Debug\net8.0\CMS.DAL.dll
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\bin\Debug\net8.0\CMS.DAL.pdb
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.csproj.AssemblyReference.cache
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.AssemblyInfo.cs
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.dll
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\refint\CMS.DAL.dll
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.pdb
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\CMS.DAL.genruntimeconfig.cache
+C:\Users\asus\Desktop\CMSProje\CMSApp\CMS.DAL\obj\Debug\net8.0\ref\CMS.DAL.dll

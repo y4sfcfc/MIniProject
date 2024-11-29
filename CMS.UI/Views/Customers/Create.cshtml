@@ -1,0 +1,52 @@
+﻿@model CustomerVM
+@{
+	ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+		@* 		@Html.HiddenFor(c=>c.UserId) *@
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<label asp-for="Surname" class="control-label"></label>
+				<input asp-for="Surname" class="form-control" />
+				<span asp-validation-for="Surname" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label asp-for="Occupation" class="control-label"></label>
+				<input asp-for="Occupation" class="form-control" />
+				<span asp-validation-for="Occupation" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label asp-for="Address" class="control-label"></label>
+				<input asp-for="Address" class="form-control" />
+				<span asp-validation-for="Address" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3 ">
+		<div class="col-md-3">
+			<a class="btn btn-primary" href="@ViewBag.Backurl">Back</a>
+		</div>
+		<div class="col-md-3 d-flex justify-content-end">
+			<div class="form-group">
+
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
+
+</form>

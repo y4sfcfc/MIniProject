@@ -1,0 +1,68 @@
+﻿@model List<CategoryVM>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/category.css">
+</head>
+
+<body>
+    <div class="category-container">
+        <!-- Main dropdown toggle -->
+        <div class="dropdown">
+            <button class="dropdown-toggle">Categories</button>
+
+            <!-- Dropdown menu -->
+            <div class="dropdown-menu">
+                <ul>
+                    <!-- Main Category -->
+                    @foreach (var category in Model.Where(x => x.ParentId == 0).ToList())
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "Categories", new { parentId = category.Id })">
+                                @category.Name
+                            </a>
+
+                            <!-- Subcategories (Level 2) -->
+                            @if (Model.Any(x => x.ParentId == category.Id))
+                            {
+                                <div class="nested-menu">
+                                    <ul>
+                                        @foreach (var subcategory in Model.Where(x => x.ParentId == category.Id).ToList())
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("Index", "Categories", new { parentId = subcategory.Id })" class="font-weight-bold">
+                                                    @subcategory.Name
+                                                </a>
+
+                                                <!-- Level 3 Subcategories (Optional) -->
+                                                @if (Model.Any(x => x.ParentId == subcategory.Id))
+                                                {
+                                                    <div class="nested-menu">
+                                                        <ul>
+                                                            @foreach (var level3Category in Model.Where(x => x.ParentId == subcategory.Id).ToList())
+                                                            {
+                                                                <li>
+                                                                    <a href="@Url.Action("Index", "Products", new { categoryId = level3Category.Id  })">
+                                                                        @level3Category.Name
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/main.js"></script>
